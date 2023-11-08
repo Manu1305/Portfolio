@@ -49,7 +49,7 @@ function Test() {
         </div>
       )}
       {deviceName && (
-        <h1>{deviceName}</h1>
+        <h1>{deviceName}deviceName</h1>
       )}
     </div>
   );
