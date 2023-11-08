@@ -1,0 +1,13 @@
+.views-container {
+                    text-align: center;
+                    /* center the content by default */
+                }
+            
+                @media only screen and (max-width: 600px) {
+            
+                    /* adjust margin-left for smaller screens */
+                    .views-container {
+                        text-align: left;
+                        margin-left: 20px;
+                    }
+                }

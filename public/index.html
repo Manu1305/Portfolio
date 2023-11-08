@@ -25,6 +25,11 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+      <link rel="icon" type="image/x-icon" href="https://miro.medium.com/v2/resize:fit:1200/0*izsavxnm-Xb9L1kY">
+      <link rel="stylesheet" href="./assets/vendors/themify-icons/css/themify-icons.css">
+      <!-- Bootstrap + Meyawo main styles -->
+      <link rel="stylesheet" href="./assets/css/meyawo.css">
+      <link rel="stylesheet" href="sweetalert2.min.css">
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -39,5 +44,65 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+      <script>
+
+        const countEl = document.getElementById('viewss')
+        updateCount()
+        function updateCount() {
+          fetch('https://api.countapi.xyz/update/manukrishnan.com/1305/?amount=1')
+            .then(res => res.json())
+            .then(res => {
+              countEl.innerHTML = res.value;
+            })
+        }
+
+
+
+
+
+      </script>
+      <script src="./assets/vendors/jquery/jquery-3.4.1.js"></script>
+      <script src="./assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+      
+      <!-- bootstrap 3 affix -->
+      <script src="./assets/vendors/bootstrap/bootstrap.affix.js"></script>
+      
+      <!-- Meyawo js -->
+      <script src="./assets/js/meyawo.js"></script>
+      <script>
+
+        $("#submit-form").submit((e) => {
+          e.preventDefault()
+          var name1 = document.getElementById("name").value
+
+          $.ajax({
+            url: "https://script.google.com/macros/s/AKfycbwLEEIMII4daTPLmQMP5_5tdx1EJDKbLd-vnAHGAL7ocJZr0p2-bvLPmpu7xW0ytzBR/exec",
+
+            data: $("#submit-form").serialize(),
+            method: "post",
+            success: function (response) {
+              console.log(`this is response ${name1}`);
+
+              Swal.fire(`Thank you  ${name1} for messaging me , i will contact you 😍`)
+              $("#submit-form input[type=text], #submit-form input[type=email], #submit-form textarea").val("");
+
+              //window.location.href="https://google.com"
+            },
+            error: function (err) {
+              alert("Something Error")
+
+            }
+          })
+        })
+
+
+
+
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.1/dist/sweetalert2.all.min.js"></script>
+      
+      
+      
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
   </body>
 </html>
