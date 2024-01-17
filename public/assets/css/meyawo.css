@@ -12061,8 +12061,8 @@ pre .code {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  /* background-image: url(../imgs/header.jpg); */
-    background-image: url(https://img.freepik.com/free-photo/vivid-blurred-colorful-wallpaper-background_58702-2831.jpg?w=2000&t=st=1699952477~exp=1699953077~hmac=cc12f725c02574b5a181d63255062173759170e281d8bbb01b39a0f689ca136d);
+  background-image: url(../imgs/header.jpg);
+    /* background-image: url(https://nimapinfotech.com/wp-content/uploads/2023/03/mern-stack-1.png); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;

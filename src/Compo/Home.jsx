@@ -1,10 +1,9 @@
-import React from 'react'
-import { Triangle } from 'react-loader-spinner';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Triangle } from "react-loader-spinner";
+import { Link } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
 import MovingComponent from "react-moving-text";
-import Nav from './Nav';
-
+import Nav from "./Nav";
 
 function Home() {
   return (
@@ -21,11 +20,12 @@ function Home() {
 
           <div className="header-content container">
             <h1 className="header-title">
-              <span className="up">HI!</span>
+              <span className="up text-white">HI!</span>
 
-              <span className="down">I am Manu krishnan</span>
+              <span className="down text-white">I am Manu krishnan</span>
             </h1>
             <TypeAnimation
+           
               sequence={[
                 "Mern stack developer", // Types 'One'
                 1000, // Waits 1s
@@ -264,9 +264,12 @@ function Home() {
             {/* <!-- row --> */}
             <div className="pricing-wrapper">
               <div className="pricing-card">
-                <div className="pricing-card-header">
+                <div
+                  className="pricing-card-header flex"
+                  style={{ marginLeft: "43%" }}
+                >
                   <img
-                    className="pricing-card-icon"
+                    className="pricing-card-icon "
                     src="assets/imgs/weather.svg"
                     alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page"
                   />
@@ -300,7 +303,10 @@ function Home() {
                 </Link>
               </div>
               <div className="pricing-card">
-                <div className="pricing-card-header">
+                <div
+                  className="pricing-card-header"
+                  style={{ marginLeft: "43%" }}
+                >
                   <img
                     className="pricing-card-icon"
                     src="assets/imgs/you.png"
@@ -344,7 +350,10 @@ function Home() {
                 </Link>
               </div>
               <div className="pricing-card">
-                <div className="pricing-card-header">
+                <div
+                  className="pricing-card-header"
+                  style={{ marginLeft: "43%" }}
+                >
                   <img
                     className="pricing-card-icon"
                     src="assets/imgs/startup.svg"
@@ -634,4 +643,4 @@ function Home() {
   );
 }
 
-export default Home
+export default Home;
