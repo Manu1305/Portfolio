@@ -1,13 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 function Nav() {
   return (
     <div>
       <nav className="custom-navbar" data-spy="affix" data-offset-top="40" >
         <div className="container">
-          <a className="logo" href="#">
+          <Link className="logo" to="/">
             MaNu
-          </a>
+          </Link>
           <ul className="nav">
             <li className="item">
               <a className="link" href="#home">

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Weather() {
 const [weather,setWeather]=useState(null)
 const [data,setData]=useState(true)
@@ -12,6 +13,7 @@ console.log(deviceName,"device name");
 const deviceNamep = navigator.platform;
 console.log(deviceNamep+'platform');
     const handleClick = async () => {
+       toast("Not working !");
       try {
         const pos = await new Promise((resolve, reject) => {
           navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -92,6 +94,7 @@ console.log(deviceNamep+'platform');
                   </p>
                   <h5>{weather?.weather[0]?.description}</h5>
                 </div>
+               
               </div>
             </div>
           </div>

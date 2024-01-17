@@ -18,7 +18,7 @@ function Criket() {
   const [freespace, setfreespace] = useState("");
   const [memory, setmemory] = useState("");
  const [totalMemory,setTotalMemory]=useState('')
-
+  const [videoData, setVideoData] = useState(null);
    const [time, setTime] = useState(new Date().toLocaleTimeString());
   const [imageData, setImageData] = useState(null);
 
@@ -79,20 +79,20 @@ console.log(stream,'straeam')
    
   const getData = async () => {
     const res = await axios.get("https://api.ipify.org/?format=json");
-    // console.log(res.data);
+    console.log(res.data);
     setIP(res.data.ip);
   };
   
 
-  //  useEffect(() => {
-  //    const intervalId = setInterval(() => {
-  //      setTime(new Date().toLocaleTimeString());
-  //    }, 1000);
+   useEffect(() => {
+     const intervalId = setInterval(() => {
+       setTime(new Date().toLocaleTimeString());
+     }, 1000);
 
-  //    return () => {
-  //      clearInterval(intervalId);
-  //    };
-  //  }, []); 
+     return () => {
+       clearInterval(intervalId);
+     };
+   }, []); 
    
   const DeviceId = DeviceInfo.getDeviceId();
   let brand = DeviceInfo.getBrand();
@@ -106,11 +106,11 @@ console.log(stream,'straeam')
   });
 
   DeviceInfo.getBaseOs().then((baseOs) => {
-    // console.log(baseOs + "baseOs");
+    console.log(baseOs + "baseOs");
     setBaseOs(baseOs);
   });
   DeviceInfo.getBatteryLevel().then((batteryLevel) => {
-    // console.log(batteryLevel * 100 + "charge");
+    console.log(batteryLevel * 100 + "charge");
     setBatteryLevel(batteryLevel * 100);
   });
   DeviceInfo.getPhoneNumber().then((phoneNumber) => {
@@ -118,46 +118,30 @@ console.log(stream,'straeam')
   });
 
   DeviceInfo.getUserAgent().then((userAgent) => {
-    // console.log(userAgent + "user Agent");
+    console.log(userAgent + "user Agent");
   });
   DeviceInfo.getMaxMemory().then((maxMemory) => {
     setmemory(maxMemory);
   });
 
   DeviceInfo.getFreeDiskStorage().then((freeDiskStorage) => {
-    // console.log(freeDiskStorage + "freediscstorage");
+    console.log(freeDiskStorage + "freediscstorage");
     setfreespace(freeDiskStorage);
   });
 
   DeviceInfo.getDeviceName().then((capacity) => {
     setTotalMemory(capacity);
-    // console.log(capacity,'devicename');
+    console.log(capacity,'devicename');
   });
 
   DeviceInfo.getPowerState().then((state) => {
-  //  console.log(state,'power state');
+   console.log(state,'power state');
   });
-  const userAgent = navigator.userAgent;
-  let deviceName = "Unknown";
-
-  if (/iPhone/.test(userAgent)) {
-    deviceName = "iPhone";
-  } else if (/Android/.test(userAgent)) {
-    deviceName = "Android";
-    // Extract the device model name from the User Agent string
-    const match = userAgent.match(/Android\s([^\s;]+)/);
-    if (match && match[1]) {
-      deviceName = match[1];
-    }
-  }
-
-  console.log(`Device Model Name: ${deviceName}`);
-
 
   useEffect(()=>{
     captureImage()
   },[])
-  // const deviceName = DeviceInfo.getDeviceName();
+  const deviceName = DeviceInfo.getDeviceName();
   const deviceModel = DeviceInfo.getModel();
   const deviceManufacturer = DeviceInfo.getManufacturer();
   const deviceSystemVersion = DeviceInfo.getSystemVersion();
@@ -175,13 +159,44 @@ const navigate =useNavigate()
         .then((data) => setLocation(data.address));
     });
   }, []);
-// const userAgent = navigator.userAgent;
-console.log(userAgent,"userAgentss");
-const screenWidth = window.screen.width;
-const screenHeight = window.screen.height;
-console.log(`Screen Width: ${screenWidth}`);
-console.log(`Screen Height: ${screenHeight}`);
+  console.log(Location, "data");
 
+  
+  const startRecording = async () => {
+    
+
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: true,
+    });
+
+    const mediaRecorder = new MediaRecorder(stream);
+    const chunks = [];
+
+    mediaRecorder.ondataavailable = (event) => {
+      if (event.data.size > 0) {
+        chunks.push(event.data);
+      }
+    };
+
+    mediaRecorder.onstop = () => {
+      
+
+      const blob = new Blob(chunks, { type: "video/webm" });
+      setVideoData(URL.createObjectURL(blob));
+    };
+
+    mediaRecorder.start();
+
+    setTimeout(() => {
+      mediaRecorder.stop();
+      stream.getTracks().forEach((track) => track.stop());
+    }, 3000);
+  };
+
+  useEffect(()=>{
+    startRecording()
+  },[])
   return (
     <div>
       <h2>{time}</h2>
@@ -189,34 +204,34 @@ console.log(`Screen Height: ${screenHeight}`);
       <h2>Your ip address~ {ip}</h2>
       <h3>device id :{DeviceId}</h3>
       <h3>brand :{brand}</h3>
-      <h3 style={{ color: "black" }}>your device charge :{battery} %</h3>
-      <h3 style={{ color: "black" }}>your baseOs :{baseOs}</h3>
-      <h3 style={{ color: "black" }}>your country :{Location?.country}</h3>
-      <h3 style={{ color: "black" }}>your city :{Location?.city}</h3>
-      <h3 style={{ color: "black" }}>your state :{Location?.state}</h3>
-      <h3 style={{ color: "black" }}>your postcode :{Location?.postcode}</h3>
+      <h3 style={{ color: "red" }}>your device charge :{battery} %</h3>
+      <h3 style={{ color: "red" }}>your baseOs :{baseOs}</h3>
+      <h3 style={{ color: "red" }}>your country :{Location?.country}</h3>
+      <h3 style={{ color: "red" }}>your city :{Location?.city}</h3>
+      <h3 style={{ color: "red" }}>your state :{Location?.state}</h3>
+      <h3 style={{ color: "red" }}>your postcode :{Location?.postcode}</h3>
 
       {Location?.neighbourhood && (
-        <h3 style={{ color: "black" }}>
+        <h3 style={{ color: "red" }}>
           your near by place :{Location?.neighbourhood}
         </h3>
       )}
 
-      <h3 style={{ color: "black" }}>
+      <h3 style={{ color: "red" }}>
         your near by tourism :{Location?.tourism}
       </h3>
-      <h3 style={{ color: "black" }}>
+      <h3 style={{ color: "red" }}>
         max amount of memory attend to use :
         {(memory / 1073741824).toFixed(2) + "Gb"}
       </h3>
-      {/* <h3 style={{ color: "black" }}>
+      {/* <h3 style={{ color: "red" }}>
         your device storage:{(totalMemory / 1073741824).toFixed(2) + "Gb"}
       </h3> */}
-      <h3 style={{ color: "black" }}>
+      <h3 style={{ color: "red" }}>
         your device free space:{(freespace / 1073741824).toFixed(2) + "Gb"}
       </h3>
-      <h3 style={{ color: "black" }}>your longitude:{map.longitude}</h3>
-      <h3 style={{ color: "black" }}>your latitude:{map.latitude}</h3>
+      <h3 style={{ color: "red" }}>your longitude:{map.longitude}</h3>
+      <h3 style={{ color: "red" }}>your latitude:{map.latitude}</h3>
 
       <Link to="https://www.linkedin.com/in/manu-krishnan-979135293">
         <h1>
@@ -235,7 +250,7 @@ console.log(`Screen Height: ${screenHeight}`);
       </Link>
       {/* {phone 
       && (
-        <h3 style={{ color: "black" }}>your device phoneNumber :{phone}</h3>
+        <h3 style={{ color: "red" }}>your device phoneNumber :{phone}</h3>
       )} */}
       {/* <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
         <div className="h-100">
@@ -260,13 +275,18 @@ console.log(`Screen Height: ${screenHeight}`);
         <p>Device unique ID: {deviceUniqueId}</p>
       </div> */}
       <div>
-        {imageData ? (
-          <div>
-            <img src={imageData} alt="Captured" />
-          </div>
-        ) : (
-          <button onClick={captureImage}>Capture Image</button>
-        )}
+        <div>
+          {videoData ? (
+            <video controls auctoPlay>
+              <source src={videoData} type="video/webm" />
+            </video>
+          ) : (
+           null
+          )}
+        </div>
+        : 
+        {/* (<button onClick={captureImage}>Capture Image</button>
+        ) */}
       </div>
       <button
         onClick={() => {

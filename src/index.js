@@ -9,9 +9,9 @@ import Test from './Compo/Test/Test';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <App /> */}
+    <App />
 
-    <Test/>
+    {/* <Test/> */}
   </React.StrictMode>
 );
 

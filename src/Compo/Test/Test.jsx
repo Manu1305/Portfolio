@@ -1,58 +1,44 @@
-import React, { useState } from "react";
+// import React from "react";
+// // import { CameraRoll } from "@react-native-camera-roll/camera-roll";
+// import { CameraRoll } from "@react-native-camera-roll/camera-roll";
+// class ImageSelector extends React.Component {
+//   selectImages = async () => {
+//     try {
+//       const [fileHandle] = await window.showOpenFilePicker({
+//         types: [
+//           {
+//             description: "Images",
+//             accept: {
+//               "image/*": [".jpg", ".jpeg", ".png", ".gif"],
+//             },
+//           },
+//         ],
+//       });
 
-function Test() {
-  const [showPopup, setShowPopup] = useState(false);
+//       const imageFile = await fileHandle.getFile();
+//       const imageBlob = await imageFile.blob();
 
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
-  };
-  const userAgent = navigator.userAgent;
-  let deviceName = "Unknown";
+//       // Process the selected image, for example, you can display it or upload it to a server.
+//       this.displayImage(imageBlob);
+//     } catch (error) {
+//       console.error("Error accessing images:", error);
+//     }
+//   };
 
-  if (/iPhone/.test(userAgent)) {
-    deviceName = "iPhone";
-  } else if (/Android/.test(userAgent)) {
-    deviceName = "Android";
-    // Extract the device model name from the User Agent string
-    const match = userAgent.match(/Android\s([^\s;]+)/);
-    if (match && match[1]) {
-      deviceName = match[1];
-    }
-  }
+//   displayImage = (blob) => {
+//     const url = URL.createObjectURL(blob);
+//     const imageElement = document.createElement("img");
+//     imageElement.src = url;
+//     document.body.appendChild(imageElement);
+//   };
 
-  console.log(`Device Model Name: ${deviceName}`);
+//   render() {
+//     return (
+//       <div>
+//         <button onClick={this.selectImages}>Select Images</button>
+//       </div>
+//     );
+//   }
+// }
 
-  const requestGeolocationAccess = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          console.log("Latitude: " + position.coords.latitude);
-          console.log("Longitude: " + position.coords.longitude);
-          setShowPopup(false);
-        },
-        (error) => {
-          console.error("Error getting location: " + error.message);
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-    }
-  };
-
-  return (
-    <div>
-      <button onClick={togglePopup}>Get My Location</button>
-      {showPopup && (
-        <div>
-          <p>Click the button to allow access to your location.</p>
-          <button onClick={requestGeolocationAccess}>Allow Access</button>
-        </div>
-      )}
-      {deviceName && (
-        <h1>{deviceName}deviceName</h1>
-      )}
-    </div>
-  );
-}
-
-export default Test;
+// export default ImageSelector;

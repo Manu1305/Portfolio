@@ -3,11 +3,13 @@ import { Triangle } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 import { TypeAnimation } from "react-type-animation";
 import MovingComponent from "react-moving-text";
+import Nav from './Nav';
 
 
 function Home() {
   return (
     <div>
+      <Nav />
       <div data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
         {/* <!-- Page Navbar --> */}
 
@@ -15,7 +17,7 @@ function Home() {
 
         {/* <!-- page header --> */}
         <header id="home" className="header">
-          <div className="overlay"></div>
+          {/* <div className="overlay"></div> */}
 
           <div className="header-content container">
             <h1 className="header-title">
@@ -270,7 +272,6 @@ function Home() {
                   />
                 </div>
                 <div className="pricing-card-div">
-                  
                   <h6 className="pricing-card-title" style={{ color: "green" }}>
                     Weather App
                   </h6>
@@ -403,7 +404,12 @@ function Home() {
         {/* <!-- end of pricing section --> */}
 
         {/* <!-- section --> */}
-        <section className="section-sm bg-primary">
+        <section
+          className="section-sm "
+          style={{
+            backgroundImage: "linear-gradient(#36d1dc, #5b86e5)",
+          }}
+        >
           {/* <!-- container --> */}
           <div className="container text-center text-sm-left">
             {/* <!-- row --> */}
@@ -535,8 +541,12 @@ function Home() {
         {/* <!-- contact section --> */}
         <section className="section" id="contact">
           <div className="container text-center">
-            <p className="section-subtitle">How can you communicate?</p>
-            <h6 className="section-title mb-5">Contact Me</h6>
+            <p className="section-subtitle" style={{ color: "red" }}>
+              How can you communicate?
+            </p>
+            <h6 className="section-title mb-5" style={{ color: "green" }}>
+              Contact Me
+            </h6>
             {/* <!-- contact form --> */}
             <form
               action=""
@@ -578,7 +588,7 @@ function Home() {
                   <input
                     type="submit"
                     value="Send Message"
-                    className="btn btn-outline-primary rounded"
+                    className="btn btn-outline-danger rounded"
                   />
                 </div>
               </div>
